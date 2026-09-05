@@ -338,6 +338,73 @@
   }
 
   /* ---------------------------------
+   * 12. Hero 3D mouse parallax
+   * --------------------------------- */
+  function initHeroParallax() {
+    const scene = qs("#hero-3d-scene");
+    const visual = qs("#hero-visual");
+    if (!scene || !visual || prefersReducedMotion) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    let raf = null;
+    let targetX = 0;
+    let targetY = 0;
+    let currentX = 0;
+    let currentY = 0;
+
+    const render = () => {
+      currentX += (targetX - currentX) * 0.08;
+      currentY += (targetY - currentY) * 0.08;
+      scene.style.transform = `rotateY(${currentX}deg) rotateX(${currentY}deg)`;
+      raf = requestAnimationFrame(render);
+    };
+
+    visual.addEventListener("mousemove", (e) => {
+      const rect = visual.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width - 0.5;
+      const py = (e.clientY - rect.top) / rect.height - 0.5;
+      targetX = px * 14;
+      targetY = -py * 10;
+    });
+
+    visual.addEventListener("mouseleave", () => {
+      targetX = 0;
+      targetY = 0;
+    });
+
+    raf = requestAnimationFrame(render);
+  }
+
+  /* ---------------------------------
+   * 13. Card 3D tilt on hover
+   * --------------------------------- */
+  function initCardTilt() {
+    if (prefersReducedMotion) return;
+    if (window.matchMedia("(pointer: coarse)").matches) return;
+
+    const cards = qsa(
+      ".skill-card, .project-card, .achievement-card, .snapshot-card, .timeline-card.glass"
+    );
+
+    cards.forEach((card) => {
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = (e.clientX - rect.left) / rect.width;
+        const y = (e.clientY - rect.top) / rect.height;
+        const rotateY = (x - 0.5) * 12;
+        const rotateX = (0.5 - y) * 10;
+        card.classList.add("tilt-active");
+        card.style.transform = `perspective(900px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-6px)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.classList.remove("tilt-active");
+        card.style.transform = "";
+      });
+    });
+  }
+
+  /* ---------------------------------
    * Init all modules
    * --------------------------------- */
   function init() {
@@ -352,6 +419,8 @@
     initCopyEmail();
     initBackToTop();
     initTyping();
+    initHeroParallax();
+    initCardTilt();
   }
 
   if (document.readyState === "loading") {

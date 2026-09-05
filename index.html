@@ -56,8 +56,12 @@
     <section class="hero" id="home" aria-labelledby="hero-name">
       <div class="hero-bg" aria-hidden="true">
         <div class="grid-overlay"></div>
+        <div class="hero-orb hero-orb--1"></div>
+        <div class="hero-orb hero-orb--2"></div>
+        <div class="hero-orb hero-orb--3"></div>
         <div class="hero-glow hero-glow--1"></div>
         <div class="hero-glow hero-glow--2"></div>
+        <div class="hero-mesh"></div>
       </div>
 
       <div class="container hero-grid">
@@ -93,23 +97,28 @@
           </div>
         </div>
 
-        <!-- Hero visual: terminal + architecture -->
-        <div class="hero-visual reveal" aria-hidden="true">
-          <div class="arch-card arch-card--api float-a">
-            <div class="arch-label">REST API</div>
-            <div class="arch-line"><span class="method get">GET</span> /api/projects</div>
-            <div class="arch-line"><span class="method post">POST</span> /api/orders</div>
-            <div class="arch-status">200 OK · Spring Boot</div>
-          </div>
+        <!-- Hero visual: 3D terminal + architecture -->
+        <div class="hero-visual reveal" id="hero-visual" aria-hidden="true">
+          <div class="hero-3d-scene" id="hero-3d-scene">
+            <div class="scene-platform"></div>
+            <div class="scene-ring scene-ring--1"></div>
+            <div class="scene-ring scene-ring--2"></div>
 
-          <div class="terminal-card">
-            <div class="terminal-bar">
-              <span class="dot red"></span>
-              <span class="dot yellow"></span>
-              <span class="dot green"></span>
-              <span class="terminal-title">Application.java</span>
+            <div class="arch-card arch-card--api float-a card-3d">
+              <div class="arch-label">REST API</div>
+              <div class="arch-line"><span class="method get">GET</span> /api/projects</div>
+              <div class="arch-line"><span class="method post">POST</span> /api/orders</div>
+              <div class="arch-status">200 OK · Spring Boot</div>
             </div>
-            <pre class="terminal-body"><code><span class="code-kw">@RestController</span>
+
+            <div class="terminal-card card-3d">
+              <div class="terminal-bar">
+                <span class="dot red"></span>
+                <span class="dot yellow"></span>
+                <span class="dot green"></span>
+                <span class="terminal-title">Application.java</span>
+              </div>
+              <pre class="terminal-body"><code><span class="code-kw">@RestController</span>
 <span class="code-kw">@RequestMapping</span>(<span class="code-str">"/api"</span>)
 <span class="code-kw">public class</span> <span class="code-class">ProjectController</span> {
 
@@ -118,22 +127,23 @@
     <span class="code-kw">return</span> service.findAll();
   }
 }</code></pre>
-          </div>
-
-          <div class="arch-card arch-card--db float-b">
-            <div class="arch-label">Database</div>
-            <div class="db-nodes">
-              <span class="db-node">MySQL</span>
-              <span class="db-node">PostgreSQL</span>
-              <span class="db-node">MongoDB</span>
             </div>
-            <div class="arch-status">Hibernate · JDBC</div>
-          </div>
 
-          <div class="arch-card arch-card--fe float-c">
-            <div class="arch-label">Frontend</div>
-            <div class="arch-line">React.js · Components</div>
-            <div class="arch-status">Full Stack Pipeline</div>
+            <div class="arch-card arch-card--db float-b card-3d">
+              <div class="arch-label">Database</div>
+              <div class="db-nodes">
+                <span class="db-node">MySQL</span>
+                <span class="db-node">PostgreSQL</span>
+                <span class="db-node">MongoDB</span>
+              </div>
+              <div class="arch-status">Hibernate · JDBC</div>
+            </div>
+
+            <div class="arch-card arch-card--fe float-c card-3d">
+              <div class="arch-label">Frontend</div>
+              <div class="arch-line">React.js · Components</div>
+              <div class="arch-status">Full Stack Pipeline</div>
+            </div>
           </div>
         </div>
       </div>
